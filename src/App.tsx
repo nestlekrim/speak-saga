@@ -32,7 +32,6 @@ const App = () => (
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/*" element={
-              <ProtectedRoute>
                 <Layout>
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
@@ -45,7 +44,6 @@ const App = () => (
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Layout>
-              </ProtectedRoute>
             } />
           </Routes>
         </BrowserRouter>
