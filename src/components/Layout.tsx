@@ -22,7 +22,11 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const user = {
+    firstName: "John",
+    lastName: "Doe",
+    email: 'johndoe@greatchat.com'
+  }
 
   const navigation = [
     { name: "Dashboard", href: "/", icon: Home },
@@ -61,7 +65,7 @@ const Layout = ({ children }: LayoutProps) => {
                     <User className="h-4 w-4 mr-2" />
                     Profile
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={logout}>
+                  <Button variant="ghost" size="sm" onClick={() => {}}>
                     <LogOut className="h-4 w-4 mr-2" />
                     Logout
                   </Button>
