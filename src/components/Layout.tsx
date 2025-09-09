@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import { 
   MessageSquare, 
@@ -10,7 +11,9 @@ import {
   CheckCircle, 
   CreditCard, 
   Settings,
-  Users
+  Users,
+  LogOut,
+  User
 } from "lucide-react";
 
 interface LayoutProps {
@@ -19,6 +22,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const navigation = [
     { name: "Dashboard", href: "/", icon: Home },
@@ -48,12 +52,21 @@ const Layout = ({ children }: LayoutProps) => {
             </Link>
             
             <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm">
-                Support
-              </Button>
-              <Button variant="ghost" size="sm">
-                Profile
-              </Button>
+              {user && (
+                <>
+                  <span className="text-sm text-muted-foreground">
+                    Welcome, {user.firstName || user.email}
+                  </span>
+                  <Button variant="outline" size="sm">
+                    <User className="h-4 w-4 mr-2" />
+                    Profile
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={logout}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
