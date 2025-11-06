@@ -12,6 +12,7 @@ import Approval from "./pages/Approval";
 import Contracts from "./pages/Contracts";
 import Payments from "./pages/Payments";
 import Admin from "./pages/Admin";
+import Activity from "./pages/Activity";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -40,6 +41,7 @@ const App = () => (
                     <Route path="/approval" element={<Approval />} />
                     <Route path="/contracts" element={<Contracts />} />
                     <Route path="/payments" element={<Payments />} />
+                    <Route path="/activity" element={<Activity />} />
                     <Route path="/admin" element={<Admin />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
