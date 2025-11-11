@@ -12,6 +12,8 @@ import {
   Eye,
   Send
 } from "lucide-react";
+import OnboardingStepper from "@/components/OnboardingStepper";
+import OnboardingHeader from "@/components/OnboardingHeader";
 
 interface Contract {
   id: string;
@@ -150,15 +152,38 @@ Great Chat Platform                 Partner Signature
 Date: _______________              Date: _______________
   `;
 
+  const onboardingSteps = [
+    { id: 1, title: "Registration", path: "/registration", status: "completed" as const },
+    { id: 2, title: "Documents", path: "/documents", status: "completed" as const },
+    { id: 3, title: "Contracts", path: "/contracts", status: "active" as const },
+    { id: 4, title: "Payments", path: "/payments", status: "locked" as const },
+  ];
+
+  const hasSignedContract = contracts.some(c => c.status === "signed" || c.status === "completed");
+
   return (
     <div className="max-w-6xl mx-auto space-y-6">
+      {/* Onboarding Progress */}
+      <OnboardingStepper currentStep={3} steps={onboardingSteps} />
+      
+      {/* Header with Navigation */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Contract Management</h1>
-          <p className="text-muted-foreground">
-            Generate, review, and digitally sign business contracts
-          </p>
-        </div>
+        <OnboardingHeader
+          title="Contract Management"
+          description="Generate, review, and digitally sign business contracts"
+          currentStep={3}
+          totalSteps={4}
+          stepStatus={hasSignedContract ? "approved" : "pending"}
+          prevStep={{
+            label: "Back to Documents",
+            path: "/documents"
+          }}
+          nextStep={{
+            label: "Next: Payments",
+            path: "/payments",
+            disabled: !hasSignedContract
+          }}
+        />
         <Button onClick={handleGenerateContract}>
           <FileText className="h-4 w-4 mr-2" />
           Generate New Contract

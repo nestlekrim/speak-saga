@@ -14,6 +14,8 @@ import {
   AlertCircle,
   ExternalLink
 } from "lucide-react";
+import OnboardingStepper from "@/components/OnboardingStepper";
+import OnboardingHeader from "@/components/OnboardingHeader";
 
 interface PaymentRecord {
   id: string;
@@ -129,14 +131,32 @@ const Payments = () => {
     .filter(p => p.status === "pending")
     .reduce((sum, p) => sum + p.amount, 0);
 
+  const onboardingSteps = [
+    { id: 1, title: "Registration", path: "/registration", status: "completed" as const },
+    { id: 2, title: "Documents", path: "/documents", status: "completed" as const },
+    { id: 3, title: "Contracts", path: "/contracts", status: "completed" as const },
+    { id: 4, title: "Payments", path: "/payments", status: "active" as const },
+  ];
+
+  const hasCompletedPayment = payments.some(p => p.status === "completed");
+
   return (
     <div className="max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Payment Management</h1>
-        <p className="text-muted-foreground">
-          Manage your subscription and payment history
-        </p>
-      </div>
+      {/* Onboarding Progress */}
+      <OnboardingStepper currentStep={4} steps={onboardingSteps} />
+      
+      {/* Header with Navigation */}
+      <OnboardingHeader
+        title="Payment Management"
+        description="Manage your subscription and payment history"
+        currentStep={4}
+        totalSteps={4}
+        stepStatus={hasCompletedPayment ? "completed" : "pending"}
+        prevStep={{
+          label: "Back to Contracts",
+          path: "/contracts"
+        }}
+      />
 
       {/* Payment Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

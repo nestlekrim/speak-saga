@@ -9,6 +9,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { Save, Send, ArrowLeft, ArrowRight } from "lucide-react";
+import OnboardingStepper from "@/components/OnboardingStepper";
+import OnboardingHeader from "@/components/OnboardingHeader";
 
 interface RegistrationData {
   businessName: string;
@@ -298,14 +300,31 @@ const Registration = () => {
     </div>
   );
 
+  const onboardingSteps = [
+    { id: 1, title: "Registration", path: "/registration", status: "active" as const },
+    { id: 2, title: "Documents", path: "/documents", status: "locked" as const },
+    { id: 3, title: "Contracts", path: "/contracts", status: "locked" as const },
+    { id: 4, title: "Payments", path: "/payments", status: "locked" as const },
+  ];
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Business Registration</h1>
-        <p className="text-muted-foreground">
-          Complete your business registration to access Great Chat services
-        </p>
-      </div>
+      {/* Onboarding Progress */}
+      <OnboardingStepper currentStep={1} steps={onboardingSteps} />
+      
+      {/* Header with Navigation */}
+      <OnboardingHeader
+        title="Business Registration"
+        description="Complete your business registration to access Great Chat services"
+        currentStep={1}
+        totalSteps={4}
+        stepStatus="pending"
+        nextStep={{
+          label: "Next: Documents",
+          path: "/documents",
+          disabled: true
+        }}
+      />
 
       {/* Progress Bar */}
       <Card>

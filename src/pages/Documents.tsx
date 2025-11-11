@@ -14,6 +14,8 @@ import {
   Eye,
   Trash2
 } from "lucide-react";
+import OnboardingStepper from "@/components/OnboardingStepper";
+import OnboardingHeader from "@/components/OnboardingHeader";
 
 interface DocumentItem {
   id: string;
@@ -141,14 +143,37 @@ const Documents = () => {
     return documents.find(doc => doc.name === documentName);
   };
 
+  const onboardingSteps = [
+    { id: 1, title: "Registration", path: "/registration", status: "completed" as const },
+    { id: 2, title: "Documents", path: "/documents", status: "active" as const },
+    { id: 3, title: "Contracts", path: "/contracts", status: "locked" as const },
+    { id: 4, title: "Payments", path: "/payments", status: "locked" as const },
+  ];
+
+  const allDocsUploaded = requiredDocuments.length === documents.filter(d => d.uploadDate).length;
+
   return (
     <div className="max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Document Management</h1>
-        <p className="text-muted-foreground">
-          Upload and manage your required business documents
-        </p>
-      </div>
+      {/* Onboarding Progress */}
+      <OnboardingStepper currentStep={2} steps={onboardingSteps} />
+      
+      {/* Header with Navigation */}
+      <OnboardingHeader
+        title="Document Management"
+        description="Upload and manage your required business documents"
+        currentStep={2}
+        totalSteps={4}
+        stepStatus={allDocsUploaded ? "approved" : "pending"}
+        prevStep={{
+          label: "Back to Registration",
+          path: "/registration"
+        }}
+        nextStep={{
+          label: "Next: Contracts",
+          path: "/contracts",
+          disabled: !allDocsUploaded
+        }}
+      />
 
       {/* Overview Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
