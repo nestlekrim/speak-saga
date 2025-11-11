@@ -17,7 +17,7 @@ interface OnboardingStepperProps {
 const OnboardingStepper = ({ currentStep, steps }: OnboardingStepperProps) => {
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center">
         {steps.map((step, index) => {
           const isLast = index === steps.length - 1;
           const isActive = step.id === currentStep;
@@ -25,7 +25,7 @@ const OnboardingStepper = ({ currentStep, steps }: OnboardingStepperProps) => {
           const isLocked = step.status === "locked";
 
           return (
-            <div key={step.id} className="flex items-center flex-1">
+            <div key={step.id} className="flex items-center">
               {/* Step Circle and Label */}
               <div className="flex flex-col items-center">
                 <Link
