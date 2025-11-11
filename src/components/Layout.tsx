@@ -14,7 +14,8 @@ import {
   Users,
   LogOut,
   User,
-  Activity
+  Activity,
+  PlayCircle
 } from "lucide-react";
 
 interface LayoutProps {
@@ -37,6 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
     { name: "Contracts", href: "/contracts", icon: FileText },
     { name: "Payments", href: "/payments", icon: CreditCard },
     { name: "Activity", href: "/activity", icon: Activity },
+    { name: "Activation", href: "/activation", icon: PlayCircle },
   ];
 
   const adminNavigation = [

@@ -13,6 +13,7 @@ import Contracts from "./pages/Contracts";
 import Payments from "./pages/Payments";
 import Admin from "./pages/Admin";
 import Activity from "./pages/Activity";
+import Activation from "./pages/Activation";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -42,6 +43,7 @@ const App = () => (
                     <Route path="/contracts" element={<Contracts />} />
                     <Route path="/payments" element={<Payments />} />
                     <Route path="/activity" element={<Activity />} />
+                    <Route path="/activation" element={<Activation />} />
                     <Route path="/admin" element={<Admin />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
