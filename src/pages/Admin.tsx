@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import StatusBadge from "@/components/StatusBadge";
+import { Link } from "react-router-dom";
 import { 
   Users, 
   FileText, 
@@ -319,6 +320,12 @@ const Admin = () => {
               <TrendingUp className="h-6 w-6 mb-2" />
               Generate Reports
             </Button>
+            <Link to="/admin/payments" className="contents">
+              <Button variant="outline" className="h-20 flex-col">
+                <DollarSign className="h-6 w-6 mb-2" />
+                Manual Payments
+              </Button>
+            </Link>
             <Button variant="outline" className="h-20 flex-col">
               <Settings className="h-6 w-6 mb-2" />
               System Config

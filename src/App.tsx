@@ -12,6 +12,7 @@ import Approval from "./pages/Approval";
 import Contracts from "./pages/Contracts";
 import Payments from "./pages/Payments";
 import Admin from "./pages/Admin";
+import AdminPayments from "./pages/AdminPayments";
 import Activity from "./pages/Activity";
 import Activation from "./pages/Activation";
 import Login from "./pages/Login";
@@ -45,6 +46,7 @@ const App = () => (
                     <Route path="/activity" element={<Activity />} />
                     <Route path="/activation" element={<Activation />} />
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/admin/payments" element={<AdminPayments />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Layout>
