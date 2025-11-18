@@ -176,60 +176,23 @@ const AdminPayments = () => {
         </CardContent>
       </Card>
 
-      {/* Payment Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Payments
-                </p>
-                <p className="text-2xl font-bold">{payments.length}</p>
-              </div>
-              <DollarSign className="h-8 w-8 text-primary" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Amount
-                </p>
-                <p className="text-2xl font-bold">{formatCurrency(totalPayments)}</p>
-              </div>
-              <DollarSign className="h-8 w-8 text-success" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Active Businesses
-                </p>
-                <p className="text-2xl font-bold">
-                  {new Set(payments.map(p => p.businessName)).size}
-                </p>
-              </div>
-              <DollarSign className="h-8 w-8 text-accent" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
       {/* Payment History Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Payment History</CardTitle>
-          <CardDescription>
-            All manually recorded payments
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle>Payment History</CardTitle>
+              <CardDescription>
+                All manually recorded payments
+              </CardDescription>
+            </div>
+            {payments.length > 0 && (
+              <div className="text-right">
+                <p className="text-sm font-medium text-muted-foreground">Total Amount</p>
+                <p className="text-2xl font-bold text-success">{formatCurrency(totalPayments)}</p>
+              </div>
+            )}
+          </div>
         </CardHeader>
         <CardContent>
           {payments.length === 0 ? (
